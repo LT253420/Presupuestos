@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Presupuesto de Reparación</title>
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Datos de repuestos -->
+  <script src="repuestos.js" defer></script>
+
+  <!-- Lógica principal -->
+  <script src="main.js" defer></script>
+</head>
+
+<body>
+
+  <div class="card">
+
+    <form onsubmit="event.preventDefault(); buscarModelo();">
+
+      <input
+        type="text"
+        id="modeloInput"
+        placeholder="Modelo de celular"
+        autocomplete="off"
+        enterkeyhint="send"
+      >
+
+      <button type="submit">Calcular presupuesto</button>
+
+    </form>
+
+    <div id="resultado" class="resultado hidden"></div>
+
+  </div>
+
+</body>
+</html>
