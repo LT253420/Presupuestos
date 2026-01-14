@@ -1,37 +1,83 @@
+/* =======================
+   UTILIDADES
+======================= */
+
+// Redondeo personalizado
+function redondearPrecio(valor) {
+  if (valor < 100) {
+    return Math.floor(valor / 10) * 10;
+  }
+  return Math.ceil(valor / 1000) * 1000;
+}
+
+// Normaliza texto para comparar
 function normalizarTexto(texto) {
   return texto
     .toUpperCase()
-    .replace(/\s*\/\s*/g, "/")
+    .replace(/\s+/g, " ")
     .trim();
 }
+
+/* =======================
+   LÓGICA PRINCIPAL
+======================= */
 
 function buscarModelo() {
   const input = document.getElementById("modeloInput");
   const resultado = document.getElementById("resultado");
 
-  const modeloIngresado = normalizarTexto(input.value);
+  const textoIngresado = normalizarTexto(input.value);
 
-  resultado.className = "resultado hidden";
-  resultado.innerText = "";
+  // Reset visual
+  resultado.className = "resultado";
+  resultado.innerHTML = "";
 
-  for (const clave in modulos) {
-    const modelos = clave
-      .toUpperCase()
+  if (!textoIngresado) {
+    resultado.classList.add("error");
+    resultado.textContent = "⚠️ Ingresá un modelo";
+    resultado.classList.remove("hidden");
+    return;
+  }
+
+  let modeloDetectado = null;
+
+  // PASO 1: detectar el modelo exacto
+  for (const item of modulos) {
+    const variantes = normalizarTexto(item.modelo)
       .split("/")
-      .map(m => m.trim());
+      .map(v => v.trim());
 
-    if (modelos.includes(modeloIngresado)) {
-      const precioBase = modulos[clave];
-      const total = Math.round(precioBase * 1.10);
-
-      resultado.className = "resultado exito";
-      resultado.innerText = `💲 Total reparación: $${total}`;
-      resultado.classList.remove("hidden");
-      return;
+    if (variantes.some(v => textoIngresado.includes(v))) {
+      modeloDetectado = item.modelo;
+      break;
     }
   }
 
-  resultado.className = "resultado error";
-  resultado.innerText = "⚠️ Modelo no encontrado";
+  if (!modeloDetectado) {
+    resultado.classList.add("error");
+    resultado.textContent = "⚠️ Modelo no encontrado";
+    resultado.classList.remove("hidden");
+    return;
+  }
+
+  // PASO 2: juntar SOLO precios de ese modelo
+  const preciosEncontrados = modulos
+    .filter(item => item.modelo === modeloDetectado)
+    .map(item => item.precio);
+
+  let html = "";
+
+  preciosEncontrados.forEach(precio => {
+    const conGanancia = precio * 2.10; // +110%
+    const final = redondearPrecio(conGanancia);
+    html += `<div>$ ${final.toLocaleString("es-AR")}</div>`;
+  });
+
+  if (preciosEncontrados.length > 1) {
+    html = `<strong>Rango de precio a confirmar</strong><br>${html}`;
+  }
+
+  resultado.classList.add("exito");
+  resultado.innerHTML = html;
   resultado.classList.remove("hidden");
 }
