@@ -35,7 +35,9 @@ function buscarModelo() {
   if (!textoIngresado) {
     resultado.classList.add("error");
     resultado.textContent = "⚠️ Ingresá un modelo";
+    
     resultado.classList.remove("hidden");
+    resultado.style.display = "block";
     return;
   }
 
@@ -55,9 +57,11 @@ function buscarModelo() {
 
   if (!modeloDetectado) {
     resultado.classList.add("error");
-    resultado.textContent = "⚠️ Modelo no encontrado";
+    resultado.textContent = "⚠️ Modelo no encontrado / mal Escrito / SIN STOCK";
     resultado.classList.remove("hidden");
+     resultado.style.display = "block";
     return;
+    
   }
 
   // PASO 2: juntar SOLO precios de ese modelo
@@ -80,4 +84,5 @@ function buscarModelo() {
   resultado.classList.add("exito");
   resultado.innerHTML = html;
   resultado.classList.remove("hidden");
+  resultado.style.display = "block";
 }

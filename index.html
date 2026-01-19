@@ -1,20 +1,110 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Presupuesto de Reparación</title>
-
-  <!-- Estilos -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calculadora de Presupuestos</title>
   <link rel="stylesheet" href="style.css">
-
-  <!-- Datos de repuestos -->
-  <script src="repuestos.js" defer></script>
-
-  <!-- Lógica principal -->
-  <script src="main.js" defer></script>
 </head>
-
 <body>
+
+  <!-- Pantalla de carga -->
+  <div id="preloader">
+    <div class="loading-container">
+      <div class="percentage" id="percentage">0%</div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Login -->
+  <div id="loginContainer">
+    <h1>Calculadora de Presupuestos</h1>
+    <h6>Powered By Novacell Repairs - By Lucas M. Tullier</h6>
+    <button id="loginBtn" onclick="login()">Acceder con Google</button>
+  </div>
+
+  <!-- Top bar -->
+  <div class="top-bar">
+    <span id="emailText"></span>
+    <button id="logoutBtn" onclick="logout()" style="display:none;">Cerrar sesión</button>
+  </div>
+
+  <!-- Gate de contraseña post-login -->
+  <div id="passwordGate" class="button-container" style="display:none; flex-direction:column; align-items:center; gap:15px; padding:20px;">
+    <h2 class="hud-appear">🔐 Verificación de Usuario</h2>
+
+    <div class="response-box static justificado" style="text-align:center;">
+      Ingresá la contraseña para continuar.
+    </div>
+
+    <input id="pwdInput" type="password" placeholder="Contraseña"
+           class="response-box static"
+           style="max-width:260px; text-align:center;">
+
+    <div style="display:flex; gap:10px; margin-top:10px;">
+      <button onclick="verifyPassword()">Entrar</button>
+      <button onclick="logout()">Cancelar</button>
+    </div>
+
+    <div id="pwdError" class="response-box static" style="display:none; color:--color-principal; background:rgba(255,0,0,0.1); border:1px solid #--color-principal;">
+      ❌ Contraseña incorrecta.
+    </div>
+  </div>
+
+  <!-- Contenido principal -->
+  <div id="appContent" style="display:none; flex-direction: column; align-items: center; width: 100%;">
+
+  
+
+    <!-- Menú principal -->
+    <div class="button-container section" data-view id="mainMenu">
+      <button onclick="mostrarComoUsar()">Cómo usar</button>
+      <button onclick="mostrarPresupuestos()">Presupuestos</button>
+      <button onclick="window.open('https://listadefallas.vercel.app/', '_blank')">Diagnóstico de Fallas</button>
+      <button onclick="mostrarContacto()">Contacto - Soporte</button>
+      <button onclick="toggleTheme()">Modo Claro / Oscuro</button>
+    </div>
+
+    <div class="button-container section" data-view id="fallasPlacaMenu" style="display:none;"></div>
+
+    <!-- Cómo usar -->
+    <div class="button-container section" data-view id="usoMenu" style="display:none;">
+      <button onclick="volverA('main')">← Volver</button>
+      <h2>¿Cómo usar la lista?</h2>
+      <div class="response-box static justificado">
+        Esta es una página para Realizar calculos automaticos de presupuestos. Cada lista está actualizada con un precio acorde al mercado y listo para ofrecerlo al cliente.<br><br>
+        Es simple, vas a encontrar diferentes reparaciones. <br><br>
+        Solo hacés click, y te redirige a la página correspondiente para hacer el cálculo automatico.<br><br>
+        Si Algún repuesto no lo toma, hay dos opciones: que no haya stock del mismo (desde el Proveedor que se tomó la lista) o Directamente está mal escrito el modelo. <br><br>
+        TODO modelo debe escribirse correctamente. De lo contrario no brindará el presupuesto correctamente. 
+      </div>
+    </div>
+
+    <!-- Presupuestos (CORREGIDO) -->
+    <div id="presupuestosMenu" data-view class="button-container section" style="display:none;">
+
+
+
+      
+      <button onclick="mostrarPresupuestoModulo()">Módulos / Pantalla</button>
+      <button onclick="mostrarPresupuestoBateria()">Batería</button>
+      <button onclick="mostrarPresupuestoBotones()">Botones</button>
+      <button onclick="mostrarPresupuestoPin()">Pin de carga / Placa de carga</button>
+      <button onclick="mostrarPresupuestoOtros()">Otros componentes</button>
+      <button onclick="mostrarPresupuestoRevision()">Revisión / Diagnóstico</button>
+
+      <button onclick="volverA('main')">← Volver</button>
+    </div>
+
+ <div
+  id="calcPantalla"
+  class="button-container section calculadora-presupuesto hidden"
+  data-view
+>
+
+  <h2>Presupuesto · Módulo / Pantalla</h2>
 
   <div class="card">
 
@@ -35,6 +125,50 @@
     <div id="resultado" class="resultado hidden"></div>
 
   </div>
+
+  <button onclick="volverA()">Volver</button>
+
+</div>
+
+    <!-- Menú de contacto -->
+    <div class="button-container section" data-view id="contactoMenu" style="display:none;">
+      <button onclick="volverA('main')">← Volver</button>
+      <h2>Contacto - Soporte</h2>
+
+      <div class="boton-box boton-on">
+        📞 WhatsApp:
+        <a href="https://wa.me/5491127222169" target="_blank" style="color: #000; text-decoration: underline;">
+          https://wa.me/5491127222169
+        </a>
+      </div>
+
+      <div class="boton-box boton-on">
+        🤝 Te gustaría Colaborar?: <strong>Hacé tu aporte al whatsapp sobre Costos, Ideas o utilidades ONLINE para que la herramienta mejore su calidad! <br><br> También si necesitás ayuda o tenés algun inconveniente con la lista, te podemos ayudar ;)</strong>
+      </div>
+    </div>
+
+    <!-- Contenedor dinámico -->
+    <div class="button-container section" data-view id="respuestas" style="display:none;"></div>
+  </div>
+
+  <!-- Botón flotante home -->
+  <button id="backBtn" class="back-button" onclick="goToHome()">
+    <svg viewBox="0 0 24 24">
+      <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+    </svg>
+  </button>
+
+  <!-- Footer -->
+  <div class="footer">
+    <img src="PEGÁ TU IMAGEN ACÁ">
+    <div>Powered by Novacell Repairs</div>
+    <div>By Lucas M. Tuillier</div>
+  </div>
+
+  <script src="index-001.js"></script>
+  <script src="app.js" type="module"></script>
+  <script src="repuestos.js" defer></script>
+<script src="main.js" defer></script>
 
 </body>
 </html>
