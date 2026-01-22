@@ -610,7 +610,7 @@ input.response-box {
   text-align: center;
   transition: all 0.3s ease;
   box-shadow: 0 0 10px var(--color-luz); /* brillo suave */
-  //
+
   
 }
 
@@ -823,6 +823,8 @@ input.response-box.error {
   justify-content: center;
   align-items: center;
   width: 100%;
+  flex-direction: column;   /* 👈 ESTA ERA LA CLAVE */
+  gap: 25px;
 }
 
 .calculadora-presupuesto .card {

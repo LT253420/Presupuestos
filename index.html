@@ -48,7 +48,7 @@
       <button onclick="logout()">Cancelar</button>
     </div>
 
-    <div id="pwdError" class="response-box static" style="display:none; color:--color-principal; background:rgba(255,0,0,0.1); border:1px solid #--color-principal;">
+    <div id="pwdError" class="response-box static" style="display:none; color:var(--color-principal); background:rgba(255,0,0,0.1); border:1px solid #--color-principal;">
       ❌ Contraseña incorrecta.
     </div>
   </div>
@@ -62,7 +62,6 @@
     <div class="button-container section" data-view id="mainMenu">
       <button onclick="mostrarComoUsar()">Cómo usar</button>
       <button onclick="mostrarPresupuestos()">Presupuestos</button>
-      <button onclick="window.open('https://listadefallas.vercel.app/', '_blank')">Diagnóstico de Fallas</button>
       <button onclick="mostrarContacto()">Contacto - Soporte</button>
       <button onclick="toggleTheme()">Modo Claro / Oscuro</button>
     </div>
@@ -89,11 +88,12 @@
 
       
       <button onclick="mostrarPresupuestoModulo()">Módulos / Pantalla</button>
-      <button onclick="mostrarPresupuestoBateria()">Batería</button>
+      <button onclick="mostrarPresupuestoBateria()">Baterías</button>
       <button onclick="mostrarPresupuestoBotones()">Botones</button>
       <button onclick="mostrarPresupuestoPin()">Pin de carga / Placa de carga</button>
       <button onclick="mostrarPresupuestoOtros()">Otros componentes</button>
       <button onclick="mostrarPresupuestoRevision()">Revisión / Diagnóstico</button>
+      <button onclick="mostrarPresupuestoTecnico()">Presupuestos para Técnicos</button>
 
       <button onclick="volverA('main')">← Volver</button>
     </div>
@@ -117,7 +117,6 @@
         autocomplete="off"
         enterkeyhint="send"
       >
-
       <button type="submit">Calcular presupuesto</button>
 
     </form>
@@ -129,6 +128,137 @@
   <button onclick="volverA()">Volver</button>
 
 </div>
+
+<div
+  id="calcBaterias"
+  class="button-container section calculadora-presupuesto hidden"
+  data-view
+>
+
+  <h2>Presupuesto · Baterías</h2>
+
+  <div class="card">
+
+    <form onsubmit="event.preventDefault(); buscarBateria();">
+
+  <input
+    type="text"
+    id="modeloBateriaInput"
+    placeholder="Modelo de celular"
+    autocomplete="off"
+    enterkeyhint="send"
+  >
+
+  <button type="submit">Calcular presupuesto</button>
+</form>
+
+<div id="resultadoBateria" class="resultado hidden"></div>
+
+
+  </div>
+
+  <button onclick="volverA()">Volver</button>
+
+</div>
+
+<div id="mostrarPresupuestoBotones" class="calculadora-presupuesto" data-view>
+  <div class="card">
+    <h2>Presupuesto · Botones / flexs de botones (power o Volumen)</h2>
+
+    <div class="resultado exito">
+      Entre $ 15.000 a $30.000 según el modelo <br><br> (a confirmar con el tecnico)
+    </div>
+  </div>
+
+  <button class="btn-volver" onclick="volverA()">Volver</button>
+</div>
+
+<div
+  id="calcPin"
+  class="button-container section calculadora-presupuesto hidden"
+  data-view
+>
+
+  <h2>Presupuesto · Pin de carga / Placa</h2>
+
+  <div class="card">
+
+    <form onsubmit="event.preventDefault(); calcularPin();">
+<input
+        type="text"
+        id="modeloInput"
+        placeholder="Modelo de celular"
+        autocomplete="off"
+        enterkeyhint="send"
+      >
+      <button type="submit">Calcular presupuesto</button>
+
+    </form>
+
+    <div id="resultadoPin" class="resultado hidden"></div>
+  </div>
+
+  <button onclick="volverA()">Volver</button>
+
+</div>
+
+<div id="mostrarPresupuestoOtros" class="calculadora-presupuesto" data-view>
+  <div class="card">
+    <h2>Presupuesto · Otros Componentes</h2>
+
+    <div class="resultado exito">
+      Entre $ 15.000 mínimo por un Desarmado. <br><br> A confirmación con el tecnico. 
+    </div>
+  </div>
+
+  <button class="btn-volver" onclick="volverA()">Volver</button>
+</div>
+
+<div id="mostrarPresupuestoRevision" class="calculadora-presupuesto" data-view>
+  <div class="card">
+    <h2>Presupuesto · Revisión / Diagnóstico</h2>
+
+    <div class="resultado exito">
+      Entre $ 15.000 por un Desarmado básico <br><br> hasta $30.000 según complejidad.
+    </div>
+  </div>
+
+  <button class="btn-volver" onclick="volverA()">Volver</button>
+</div>
+
+<div
+  id="calcPresutec"
+  class="button-container section calculadora-presupuesto hidden"
+  data-view
+>
+
+  <h2>Presupuesto · Repuestos</h2>
+
+  <div class="card">
+
+    <form onsubmit="event.preventDefault(); calcularPresupuestoTecnico();">
+
+      <input
+        type="number"
+        id="precioTecnicoInput"
+        placeholder="Costo del repuesto"
+        autocomplete="off"
+        enterkeyhint="send"
+      >
+
+      <button type="submit">Calcular presupuesto</button>
+
+    </form>
+
+    <div id="resultadoTecnico" class="resultado hidden"></div>
+
+  </div>
+
+  <button onclick="volverA()">Volver</button>
+
+</div>
+
+
 
     <!-- Menú de contacto -->
     <div class="button-container section" data-view id="contactoMenu" style="display:none;">
@@ -168,7 +298,11 @@
   <script src="index-001.js"></script>
   <script src="app.js" type="module"></script>
   <script src="repuestos.js" defer></script>
-<script src="main.js" defer></script>
+  <script src="baterias.js" defer></script>
+<script src="main-modulos.js" defer></script>
+<script src="main-baterias.js" defer></script>
+<script src="main-pin.js" defer></script>
+<script src="main-presutec.js" defer></script>
 
 </body>
 </html>

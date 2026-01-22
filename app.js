@@ -283,6 +283,32 @@ window.mostrarPresupuestoModulo = () => {
   mostrarSeccion("calcPantalla");
 };
 
+window.mostrarPresupuestoBateria = () => {
+  mostrarSeccion("calcBaterias");
+};
+
+window.mostrarPresupuestoBotones = () => {
+  mostrarSeccion("mostrarPresupuestoBotones");
+};
+
+window.mostrarPresupuestoPin = () => {
+  mostrarSeccion("calcPin");
+};
+
+window.mostrarPresupuestoOtros = () => {
+  mostrarSeccion("mostrarPresupuestoOtros");
+};
+
+
+window.mostrarPresupuestoRevision = () => {
+  mostrarSeccion("mostrarPresupuestoRevision");
+};
+
+window.mostrarPresupuestoTecnico = () => {
+  mostrarSeccion("calcPresutec");
+};
+
+
 document.addEventListener("DOMContentLoaded", () => {
   mostrarSeccion("mainMenu", true);
 });
