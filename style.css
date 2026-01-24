@@ -78,7 +78,7 @@ h2 {
   flex-direction: column;
   gap: 20px;
   width: 100%;
-  margin-bottom: 36px;
+  margin-bottom: 48px;
   max-width: 600px;
   padding: 0 20px;
   z-index: 1;
@@ -986,6 +986,7 @@ margin-bottom: 24px;
     transform: scale(1);
   }
 }
+
 
 
 
