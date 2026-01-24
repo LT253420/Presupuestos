@@ -851,6 +851,7 @@ input.response-box.error {
 .calculadora-presupuesto input {
   width: 100%;
   max-width: 260px;
+  font-size: 16px;
   padding: 12px;
   max-width: 260px;
   border-radius: 10px;
@@ -983,5 +984,6 @@ input.response-box.error {
     transform: scale(1);
   }
 }
+
 
 
