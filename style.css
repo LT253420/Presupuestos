@@ -830,9 +830,10 @@ input.response-box.error {
 .calculadora-presupuesto .card {
   background: transparent;
   padding: 32px 28px;
+  
   border-radius: 18px;
   width: 360px;
-
+margin-bottom: 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -984,6 +985,7 @@ input.response-box.error {
     transform: scale(1);
   }
 }
+
 
 
 
