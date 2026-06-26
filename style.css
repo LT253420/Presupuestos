@@ -29,7 +29,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 40px;
+  padding-top: 20px;
   min-height: 100vh;
   background-image: var(--fondo-imagen);
   background-size: cover;
@@ -74,15 +74,13 @@ h2 {
 
 /* Contenedor de botones */
 .button-container {
-  display: flex;
+display: flex;
   flex-direction: column;
   gap: 20px;
   width: 100%;
-  margin-bottom: 60px;
-  max-width: 600px;
+  max-width: 400px;
   padding: 0 20px;
   z-index: 1;
-  margin-top: 100px;
 }
   button {
     font-size: 0.95rem;
