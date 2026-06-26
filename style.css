@@ -823,6 +823,7 @@ input.response-box.error {
   justify-content: center;
   align-items: center;
   width: 100%;
+  max-width: 260px;
   flex-direction: column;   /* 👈 ESTA ERA LA CLAVE */
   gap: 25px;
   margin-top: 40px;
