@@ -825,6 +825,8 @@ input.response-box.error {
   width: 100%;
   flex-direction: column;   /* 👈 ESTA ERA LA CLAVE */
   gap: 25px;
+  margin-top: 40px;
+  padding-bottom: 100px;
 }
 
 .calculadora-presupuesto .card {
@@ -834,7 +836,7 @@ input.response-box.error {
   border-radius: 18px;
   width: 100%;
   margin-bottom: 60px;
-  max-width: 600px;
+  max-width: 360px;
 margin-bottom: 24px;
   display: flex;
   flex-direction: column;
