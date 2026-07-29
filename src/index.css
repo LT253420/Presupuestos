@@ -105,16 +105,16 @@ body::before {
   background:
   linear-gradient(
     90deg,
-    rgba(137, 71, 199, 0.015) 1px,
+    rgba(137, 71, 199, 0.02) 1px,
     transparent 1px
   ),
   linear-gradient(
-    rgba(168,85,247,.015) 1px,
+    rgba(168,85,247,.02) 1px,
     transparent 1px
   ),
   radial-gradient(
     ellipse at 50% 0%,
-    rgba(168,85,247,.015) 0%,
+    rgba(168,85,247,.02) 0%,
     transparent 60%
   );
   background-size: 40px 40px, 40px 40px, 100% 100%;
